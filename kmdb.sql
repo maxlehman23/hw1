@@ -151,25 +151,42 @@ CREATE TABLE roles (
 -- TODO!
 
 INSERT INTO movies (title, release_date, rating, studio_id) VALUES
-("Batman Begins", 2005, "PG-13", 1),
-("The Dark Knight", 2008, "PG-13", 1),
-("The Dark Knight Rises", 2012, "PG-13", 1);
+('Batman Begins', 2005, 'PG-13', 1),
+('The Dark Knight', 2008, 'PG-13', 1),
+('The Dark Knight Rises', 2012, 'PG-13', 1);
 
 INSERT INTO studios (studio_name) VALUES
-("Warner Bros.");
+('Warner Bros.');
 
 INSERT INTO actors (actor_name) VALUES
-("Christian Bale"),
-("Michael Caine"),
-("Liam Neeson"),
-("Katie Holmes"),
-("Gary Oldman"),
-("Heath Ledger"),
-("Aaron Eckhart"),
-("Maggie Gyllenhaal"),
-("Tom Hardy"),
-("Joseph Gordon-Levitt"),
-("Anne Hathaway");
+('Christian Bale'),
+('Michael Caine'),
+('Liam Neeson'),
+('Katie Holmes'),
+('Gary Oldman'),
+('Heath Ledger'),
+('Aaron Eckhart'),
+('Maggie Gyllenhaal'),
+('Tom Hardy'),
+('Joseph Gordon-Levitt'),
+('Anne Hathaway');
+
+INSERT INTO roles (movie_id, actor_id, role_name) VALUES 
+(1, 1, 'Bruce Wayne'),
+(1, 2, 'Alfred'),
+(1, 3, 'Ras al Ghul'),
+(1, 4, 'Rachel Dawes'),
+(1, 5, 'Commissioner Gordon'),
+(2, 1, 'Bruce Wayne'),
+(2, 6, 'Joker'),
+(2, 7, 'Harvey Dent'),
+(2, 2, 'Alfred'),
+(2, 8, 'Rachel Dawes'),
+(3, 1, 'Bruce Wayne'),
+(3, 5, 'Commissioner Gordon'),
+(3, 9, 'Bane'),
+(3, 10, 'John Blake'),
+(3, 11, 'Selina Kyle');
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -178,6 +195,7 @@ INSERT INTO actors (actor_name) VALUES
 
 -- The SQL statement for the movies output
 -- TODO!
+SELECT movies.title, movies.release_date, movies.rating, studios.studio_name FROM movies INNER JOIN studios ON studios.id = movies.studio_id;
 
 -- Prints a header for the cast output
 .print ""
@@ -185,6 +203,6 @@ INSERT INTO actors (actor_name) VALUES
 .print "========"
 .print ""
 
-
 -- The SQL statement for the cast output
 -- TODO!
+SELECT movies.title, actors.actor_name, roles.role_name FROM roles INNER JOIN movies ON roles.movie_id = movies.id INNER JOIN actors ON roles.actor_id = actors.id;
